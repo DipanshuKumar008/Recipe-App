@@ -239,11 +239,13 @@ body::-webkit-scrollbar-track {
 @media screen and (max-width:650px) {
     header nav {
         flex-direction: column;
+        height: 20vh;
+
     }
 
     header nav form {
         width: 80%;
-        margin-top: 20px;
+        margin-top: 8px;
     }
 
     .recipe-container {

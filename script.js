@@ -6,56 +6,57 @@ const recipeCloseBtn = document.querySelector('.recipe-closeBtn')
 
 
 // function to get fetchRecipes
-const fetchRecipes = async (query)=>{
+const fetchRecipes = async (query) => {
     recipeContainer.innerHTML = "<h2>Loading Recipes....</h2>"
-    const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
-    const response = await data.json();
-    // console.log(response);
+    try {
+        const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
+        const response = await data.json();
 
+        recipeContainer.innerHTML = ""
+        response.meals.forEach(meal => {
+            const recipeDiv = document.createElement('div')
+            recipeDiv.classList.add('recipe')
 
-
-    
-    recipeContainer.innerHTML = ""
-    response.meals.forEach(meal=> {
-        const recipeDiv = document.createElement('div')
-        recipeDiv.classList.add('recipe')
-
-        recipeDiv.innerHTML= `
+            recipeDiv.innerHTML = `
             <img src="${meal.strMealThumb}">
             <h3>${meal.strMeal}</h3>
             <p>Belongs to <span>${meal.strCategory}</span> Category</p>
             <p><span>${meal.strArea}</span> Dish</p>`
-        const button = document.createElement('button')
-        button.textContent = "View Recipe"
-        recipeDiv.appendChild(button)
+            const button = document.createElement('button')
+            button.textContent = "View Recipe"
+            recipeDiv.appendChild(button)
 
 
-        // adding Eventlistener to recipe button
-        button.addEventListener("click",()=>{
-            openRecipePopup(meal)
-        })
+            // adding Eventlistener to recipe button
+            button.addEventListener("click", () => {
+                openRecipePopup(meal)
+            })
 
 
-        recipeContainer.appendChild(recipeDiv);
-    });
+            recipeContainer.appendChild(recipeDiv);
+        });
+    }
+    catch(error){
+        recipeContainer.innerHTML = "<h2>No recipe available please check another recipes </h2>"
+    }
 }
 // function to fech ingredients and measurements
-const fechIngredients = (meal)=>{
+const fechIngredients = (meal) => {
     // console.log(meal)
     let ingredientsList = ""
-    for(let i = 1 ; i<=20 ; i++) {
-        const ingredient =  meal[`strIngredient${i}`];
-        if(ingredient){
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        if (ingredient) {
             const measure = meal[`strMeasure${i}`]
-            ingredientsList +=`<li>${measure} ${ingredient}</li>`
+            ingredientsList += `<li>${measure} ${ingredient}</li>`
         }
-        else{
+        else {
             break;
         }
     }
     return ingredientsList;
 }
-const openRecipePopup = (meal)=>{
+const openRecipePopup = (meal) => {
     recipeDetailsContent.innerHTML = `
         <h2 class="recipeName">${meal.strMeal}</h2>
         <h3>Ingredents : </h3>
@@ -66,19 +67,19 @@ const openRecipePopup = (meal)=>{
         </div>
 
     `
-    recipeDetailsContent.parentElement.style.display ="block";
+    recipeDetailsContent.parentElement.style.display = "block";
 
 }
 
-recipeCloseBtn.addEventListener('click',()=>{
-    recipeDetailsContent.parentElement.style.display ="none";
+recipeCloseBtn.addEventListener('click', () => {
+    recipeDetailsContent.parentElement.style.display = "none";
 })
 
 
-searchBtn.addEventListener('click',(e)=>{
+searchBtn.addEventListener('click', (e) => {
     e.preventDefault()
     const searchInput = searchBox.value.trim();
-    if(!searchInput){
+    if (!searchInput) {
         recipeContainer.innerHTML = `<h2>Type the meal in the search box.</h2>`
         return
     }
