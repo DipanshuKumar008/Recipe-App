@@ -200,6 +200,19 @@ form button[type="submit"]:hover,.recipe-closeBtn:hover{
 }
 
 
+
+body::-webkit-scrollbar{
+    width: 16px;
+}
+body::-webkit-scrollbar-thumb{
+    background:#b5b5ba;
+}
+
+body::-webkit-scrollbar-track{
+    background:#ebebeb;
+}
+
+
 /* Responsive Code */
 @media screen and (max-width:650px){
     header nav{
@@ -231,4 +244,9 @@ form button[type="submit"]:hover,.recipe-closeBtn:hover{
     
 
 
+}
+@media screen and (max-width:493px){
+    .recipe-container{
+        place-items:center;
+    }
 }

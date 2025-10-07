@@ -10,7 +10,7 @@ const fetchRecipes = async (query)=>{
     recipeContainer.innerHTML = "<h2>Loading Recipes....</h2>"
     const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
     const response = await data.json();
-    console.log(response);
+    // console.log(response);
 
 
 
@@ -41,7 +41,7 @@ const fetchRecipes = async (query)=>{
 }
 // function to fech ingredients and measurements
 const fechIngredients = (meal)=>{
-    console.log(meal)
+    // console.log(meal)
     let ingredientsList = ""
     for(let i = 1 ; i<=20 ; i++) {
         const ingredient =  meal[`strIngredient${i}`];
