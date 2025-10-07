@@ -147,8 +147,8 @@ form button[type="submit"]:hover, .recipe-closeBtn:hover {
     -webkit-transform: translate(-50%, -50%);
     background-color: #694c27;
     border-radius: 12px;
-    height: 70%;
-    width: 60%;
+    height: 60%;
+    width: 50%;
     font-size: 20px;
     transition: all 0.5s ease-in-out;
     overflow-y: scroll;
